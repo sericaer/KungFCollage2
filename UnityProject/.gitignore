@@ -10,6 +10,8 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Mm]emoryCaptures/
+/[Bb]lend/bin/
+/[Bb]lend/obj/
 
 /[Aa]ssets/**/save
 /[Aa]ssets/**/save.meta
