@@ -1,51 +1,44 @@
-﻿#if UNITY_5_3_OR_NEWER
-#define NOESIS
-using Noesis;
-#else
-using System;
-using System.Windows.Controls;
-#endif
-
-
+﻿using System;
+using System.ComponentModel;
 using System.Windows.Input;
-using UnityEngine;
 
 namespace UnityProject
 {
-    class MainSceneView : MonoBehaviour
+    class MainSceneModel : INotifyPropertyChanged
     {
-#if NOESIS
-        public NoesisEventCommand StartCommand;
-#endif
-
-#if NOESIS
-        void Start()
+        public int intValue
         {
+            get
+            {
+                return _intValue;
+            }
+            set
+            {
+                _intValue = value;
 
-            StartCommand.AddListener(OnStart);
-            NoesisView view = GetComponent<NoesisView>();
-            view.Content.DataContext = this;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(intValue)));
+            }
         }
-#endif
 
-        public static void OnStart(object obj)
+        private int _intValue;
+
+        public DelegateCommand StartCommand { get; }
+        public DelegateCommand StartCommand2 { get; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public MainSceneModel()
         {
-            
-#if NOESIS
-            Debug.Log("Start");
-#else
-            Console.WriteLine("Start");
-#endif
+            StartCommand = new DelegateCommand(OnStart);
 
+            StartCommand2 = new DelegateCommand(OnStart);
+        }
+
+        public void OnStart(object obj)
+        {
+            intValue++;
         }
     }
-
-#if NOESIS
-    public class DelegateCommand : NoesisEventCommand
-    {
-
-    }
-#else
     public class DelegateCommand : ICommand
     {
         public DelegateCommand(Action<object> execute)
@@ -97,5 +90,4 @@ namespace UnityProject
         private Func<object, bool> _canExecute;
         private Action<object> _execute;
     }
-#endif
 }

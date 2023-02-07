@@ -1,0 +1,79 @@
+<UserControl x:Class="UnityProject.MainSceneView"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:noesis="clr-namespace:NoesisGUIExtensions;assembly=Noesis.GUI.Extensions" MinWidth="1440" MinHeight="900">
+
+    <noesis:Xaml.Dependencies>
+        <noesis:Dependency Source="TestControl.xaml"/>
+    </noesis:Xaml.Dependencies>
+
+    <Grid MinWidth="1440" MinHeight="900">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" Width="920">
+            <Button Width="120" Command="{Binding StartCommand}">BUTTON1</Button>
+            <StackPanel Name="topPanel" Orientation="Horizontal" Height="40" VerticalAlignment="Top">
+                <Button Width="160">
+                    BUTTON2
+                    <Button.Triggers>
+                        <EventTrigger RoutedEvent="Button.Click">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ObjectAnimationUsingKeyFrames  Storyboard.TargetName="buildingForms" Storyboard.TargetProperty="Visibility">
+                                        <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Collapsed}"/>
+                                    </ObjectAnimationUsingKeyFrames>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Button.Triggers>
+                </Button>
+                <Button Width="160">BUTTON3</Button>
+                <Button Width="160">BUTTON4</Button>
+                <Button Width="160">BUTTON5</Button>
+                <TextBox Width="160" Text ="{Binding intValue}" HorizontalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"></TextBox>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Name="dataPanel" Grid.Row="1" Margin="0,60,0,0" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left">
+            <!--<StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,40,0,0">
+                <Slider Maximum="100" Width="100"></Slider>
+                <Slider Maximum="100" Width="100"></Slider>
+            </StackPanel>-->
+            <StackPanel Name="buildingDataPanel" Width="280">
+                <Label Foreground="Black" Background="#FF7C7C7C" HorizontalContentAlignment="Center">12345</Label>
+                <Button>abcde</Button>
+                <Button>abcde</Button>
+                <Button>abcde</Button>
+                <Button>abcde</Button>
+            </StackPanel>
+            <Button Name ="dataPanelHiddeButton" Width="30" Height="30" VerticalAlignment="Top">
+                <Button.Triggers>
+                    <EventTrigger RoutedEvent="Button.Click">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ObjectAnimationUsingKeyFrames  Storyboard.TargetName="dataPanel" Storyboard.TargetProperty="Visibility">
+                                    <DiscreteObjectKeyFrame KeyTime="0:0:0"  Value="{x:Static Visibility.Collapsed}"/>
+                                </ObjectAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Button.Triggers>
+            </Button>
+        </StackPanel>
+        <ListView Name="buildingForms" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="800" Height="600">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Name" Width="120" DisplayMemberBinding="{Binding Name}" />
+                    <GridViewColumn Header="Age" Width="50" DisplayMemberBinding="{Binding Age}" />
+                    <GridViewColumn Header="Mail" Width="150" DisplayMemberBinding="{Binding Mail}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <Button HorizontalAlignment="Left" >Button Middle</Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

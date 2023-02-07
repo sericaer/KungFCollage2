@@ -10,40 +10,50 @@
 
 
 using System;
+using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 namespace Noesis
 {
 
-public class UserControl : ContentControl {
-  internal new static UserControl CreateProxy(IntPtr cPtr, bool cMemoryOwn) {
-    return new UserControl(cPtr, cMemoryOwn);
-  }
+    public class UserControl : ContentControl
+    {
+        internal new static UserControl CreateProxy(IntPtr cPtr, bool cMemoryOwn)
+        {
+            return new UserControl(cPtr, cMemoryOwn);
+        }
 
-  internal UserControl(IntPtr cPtr, bool cMemoryOwn) : base(cPtr, cMemoryOwn) {
-  }
+        internal UserControl(IntPtr cPtr, bool cMemoryOwn) : base(cPtr, cMemoryOwn)
+        {
+        }
 
-  internal static HandleRef getCPtr(UserControl obj) {
-    return (obj == null) ? new HandleRef(null, IntPtr.Zero) : obj.swigCPtr;
-  }
+        internal static HandleRef getCPtr(UserControl obj)
+        {
+            return (obj == null) ? new HandleRef(null, IntPtr.Zero) : obj.swigCPtr;
+        }
 
-  public UserControl() {
-  }
+        public UserControl()
+        {
+        }
 
-  protected override IntPtr CreateCPtr(Type type, out bool registerExtend) {
-    if (type == typeof(UserControl)) {
-      registerExtend = false;
-      return NoesisGUI_PINVOKE.new_UserControl();
+        protected override IntPtr CreateCPtr(Type type, out bool registerExtend)
+        {
+            if (type == typeof(UserControl))
+            {
+                registerExtend = false;
+                return NoesisGUI_PINVOKE.new_UserControl();
+            }
+            else
+            {
+                return base.CreateExtendCPtr(type, out registerExtend);
+            }
+        }
+
+        internal new static IntPtr Extend(string typeName)
+        {
+            return NoesisGUI_PINVOKE.Extend_UserControl(Marshal.StringToHGlobalAnsi(typeName));
+        }
     }
-    else {
-      return base.CreateExtendCPtr(type, out registerExtend);
-    }
-  }
-
-  internal new static IntPtr Extend(string typeName) {
-    return NoesisGUI_PINVOKE.Extend_UserControl(Marshal.StringToHGlobalAnsi(typeName));
-  }
-}
-
 }
 

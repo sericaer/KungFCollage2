@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\myproject\KungFCollage\UnityProject\Blend\App.xaml
-176579899
+21568816981
 
-41814495455
+5-306990558
 681933143932
-Assets\UnityProjectMainView.xaml;
+Assets\MainSceneView.xaml;Assets\TestControl.xaml;
 
-False
+True
 
